@@ -9,6 +9,7 @@
     tools:context=".PlayerActivity">
 
 
+<!--    layout for header of player screen-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +17,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+<!--        back button-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,6 +26,7 @@
             android:contentDescription="@string/back_button"
             android:src="@drawable/back_icon" />
 
+<!--        text of header-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -35,6 +38,7 @@
             android:textSize="20sp"
             tools:ignore="NestedWeights" />
 
+<!--        favourite button-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,15 +48,17 @@
             android:src="@drawable/favorite_empty_icon" />
     </LinearLayout>
 
+<!--    song image-->
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_margin="10dp"
-        android:src="@drawable/music_icon"
+        android:src="@drawable/demo"
         app:shapeAppearanceOverlay="@style/curved"
         app:strokeColor="@color/custom_blue"
         app:strokeWidth="5dp" />
 
+<!--    diaplaying the song name-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,6 +69,7 @@
         android:textColor="@color/black"
         android:textSize="18sp" />
 
+<!--    layout for play pause,back and next button-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,12 +78,14 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+<!--        back button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/previous_icon"
             app:iconSize="40dp" />
 
+<!--        pause button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,6 +96,7 @@
             app:iconTint="@android:color/white"
             app:shapeAppearanceOverlay="@style/curved" />
 
+<!--        next button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,6 +105,7 @@
 
     </LinearLayout>
 
+<!--    layout for seekbar, and song time-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="25dp"
@@ -102,6 +113,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
+<!--        song start time-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -110,12 +122,14 @@
             android:textColor="@color/black"
             android:textSize="15sp" />
 
+<!--        seek bar-->
         <androidx.appcompat.widget.AppCompatSeekBar
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             tools:ignore="NestedWeights" />
 
+<!--        song end time-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -126,12 +140,15 @@
 
     </LinearLayout>
 
+
+<!--    layout for repeat,equalizer,timer and share button-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal">
 
+<!--        repeat button-->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -142,6 +159,7 @@
             app:tint="@color/custom_pink"
             tools:ignore="NestedWeights" />
 
+<!--        equalizer button-->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -151,6 +169,7 @@
             android:src="@drawable/equalizer_icon"
             app:tint="@color/custom_pink" />
 
+<!--        timer button-->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -160,6 +179,7 @@
             android:src="@drawable/timer_icon"
             app:tint="@color/custom_pink" />
 
+<!--        share button-->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"

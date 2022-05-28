@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+<!--            shuffle button-->
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
@@ -28,6 +29,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black" />
 
+<!--            favourite button-->
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
@@ -39,6 +41,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black" />
 
+<!--            playlist button-->
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
@@ -60,6 +63,7 @@
             android:textColor="@color/black"
             android:layout_margin="10dp"/>
 
+<!--        songs list-->
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
