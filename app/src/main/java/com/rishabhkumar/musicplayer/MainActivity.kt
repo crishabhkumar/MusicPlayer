@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.rishabhkumar.musicplayer.databinding.ActivityMainBinding
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,7 +48,22 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity,PlaylistActivity::class.java)
             startActivity(intent)
         }
-        requestRunTimePermission()
+
+        binding.navView.setNavigationItemSelectedListener{
+            when(it.itemId){
+                R.id.navFeedback->
+                    Toast.makeText(this,"Feedback clicked.",Toast.LENGTH_SHORT).show()
+
+                R.id.navSettings->
+                    Toast.makeText(this,"Settings clicked.",Toast.LENGTH_SHORT).show()
+
+                R.id.navAbout->
+                    Toast.makeText(this,"About clicked.",Toast.LENGTH_SHORT).show()
+
+                R.id.navExit-> exitProcess(1)
+            }
+            true
+        }
 
     }
     //for requesting permission
