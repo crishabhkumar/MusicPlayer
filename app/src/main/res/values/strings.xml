@@ -13,4 +13,6 @@
     <string name="equalizer">Equalizer</string>
     <string name="timer">Timer</string>
     <string name="share">Share</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

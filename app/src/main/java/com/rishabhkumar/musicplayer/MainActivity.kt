@@ -1,10 +1,13 @@
 package com.rishabhkumar.musicplayer
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.rishabhkumar.musicplayer.databinding.ActivityMainBinding
@@ -12,6 +15,7 @@ import com.rishabhkumar.musicplayer.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
+    private lateinit var toggle : ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_MusicPlayer)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //for nav drawer
+        toggle = ActionBarDrawerToggle(this,binding.root,R.string.open,R.string.close)
+        binding.root.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //for checking buttons are working properly or not
         binding.btnShuffle.setOnClickListener{
@@ -44,8 +53,8 @@ class MainActivity : AppCompatActivity() {
     //for requesting permission
     private fun requestRunTimePermission(){
         if(ActivityCompat.checkSelfPermission(this@MainActivity,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),11)
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),11)
         }
     }
 
@@ -55,9 +64,16 @@ class MainActivity : AppCompatActivity() {
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 Toast.makeText(this,"Permission granted.",Toast.LENGTH_SHORT).show()
             else{
-                ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),11)
+                ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),11)
             }
         }
+    }
 
+    //have to override coz if doesn't override header button will not work
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)){
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
