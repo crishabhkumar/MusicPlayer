@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="2dp"
     tools:context=".PlaylistActivity">
 
     <!--    For playlist header-->
@@ -11,22 +12,24 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:background="@color/custom_pink"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        back button-->
+        <!--        back button-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="@string/playlist"
+            android:padding="5dp"
             android:src="@drawable/back_icon"
             app:tint="@color/white" />
 
-<!--        playlist text-->
+        <!--        playlist text-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,8 +42,7 @@
     </LinearLayout>
 
 
-
-<!--    floating button -->
+    <!--    floating button -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

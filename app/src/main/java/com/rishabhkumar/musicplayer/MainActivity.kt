@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestRunTimePermission()
-        setTheme(R.style.Theme_MusicPlayer)
+        setTheme(R.style.customPinkNav)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //for nav drawer
