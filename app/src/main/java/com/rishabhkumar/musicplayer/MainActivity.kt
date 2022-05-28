@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rishabhkumar.musicplayer.databinding.ActivityMainBinding
 import kotlin.system.exitProcess
 
@@ -17,18 +18,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
     private lateinit var toggle : ActionBarDrawerToggle
+    private lateinit var musicAdapter : MusicAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestRunTimePermission()
-        setTheme(R.style.customPinkNav)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        //for nav drawer
-        toggle = ActionBarDrawerToggle(this,binding.root,R.string.open,R.string.close)
-        binding.root.addDrawerListener(toggle)
-        toggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        initializeLayout()
 
         //for checking buttons are working properly or not
         binding.btnShuffle.setOnClickListener{
@@ -91,5 +85,38 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    //to make code mush easier to read
+    @SuppressLint("SetTextI18n")
+    private fun initializeLayout(){
+        requestRunTimePermission()
+        setTheme(R.style.customPinkNav)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //for nav drawer
+        toggle = ActionBarDrawerToggle(this,binding.root,R.string.open,R.string.close)
+        binding.root.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val musicList = ArrayList<String>()
+        musicList.add("My name is khan.")
+        musicList.add("Dilli wali girlfriend")
+        musicList.add("Jhagda")
+        musicList.add("8 Parche")
+        musicList.add("Dhadkan")
+        musicList.add("Dulhe ka sehra")
+        musicList.add("On my way")
+        musicList.add("Chandanniya")
+
+        //ram bhot bachata hai
+        binding.musicRecyclerView.setHasFixedSize(true)
+        binding.musicRecyclerView.setItemViewCacheSize(13)
+        binding.musicRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+        musicAdapter = MusicAdapter(this@MainActivity,musicList)
+        binding.musicRecyclerView.adapter = musicAdapter
+
+        binding.txtTotalSongs.text = "Total songs: " + musicAdapter.itemCount
     }
 }

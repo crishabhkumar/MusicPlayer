@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:padding="2dp">
 
@@ -18,9 +18,11 @@
         android:id="@+id/txtSongName"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:layout_marginStart="5dp"
         android:layout_toStartOf="@id/txtSongDuration"
         android:layout_toEndOf="@+id/imgMusicView"
-        android:layout_marginStart="5dp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
         android:text="@string/song_name"
         android:textColor="@color/black" />
 
@@ -28,10 +30,12 @@
         android:id="@+id/txtSongAlbum"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="30dp"
         android:layout_toStartOf="@id/txtSongDuration"
         android:layout_toEndOf="@+id/imgMusicView"
-        android:layout_marginStart="5dp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
         android:text="@string/song_album" />
 
     <TextView

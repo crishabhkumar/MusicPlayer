@@ -62,6 +62,7 @@
 
 <!--        for total songs count-->
         <TextView
+            android:id="@+id/txtTotalSongs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Total songs:"
@@ -70,6 +71,7 @@
 
 <!--        songs list-->
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/musicRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
