@@ -52,6 +52,7 @@
 
     <!--    song image-->
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgSongImagePlayerActivity"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_margin="10dp"
@@ -62,6 +63,7 @@
 
     <!--    diaplaying the song name-->
     <TextView
+        android:id="@+id/txtSongNamePlayerActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -87,8 +89,9 @@
             app:icon="@drawable/previous_icon"
             app:iconSize="40dp" />
 
-        <!--        pause button-->
+        <!--        play & pause button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btnPlayAndPause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
