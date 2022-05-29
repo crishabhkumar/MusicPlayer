@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
@@ -22,8 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var musicAdapter: MusicAdapter
 
-    companion object{
-        lateinit var musicListMA : ArrayList<Music>
+    companion object {
+        lateinit var musicListMA: ArrayList<Music>
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -159,13 +160,14 @@ class MainActivity : AppCompatActivity() {
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.DURATION,
             MediaStore.Audio.Media.DATE_ADDED,
-            MediaStore.Audio.Media.DATA
+            MediaStore.Audio.Media.DATA,
+            MediaStore.Audio.Media.ALBUM_ID
         )
         val cursor = this.contentResolver.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
             projection,
-            selection,null,
-            MediaStore.Audio.Media.DATE_ADDED + " DESC",null
+            selection, null,
+            MediaStore.Audio.Media.DATE_ADDED + " DESC", null
         )
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -175,15 +177,27 @@ class MainActivity : AppCompatActivity() {
                     val idC = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID))
                     val albumC =
                         cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
+                    val albumIdC =
+                        cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))
+                    val uri = Uri.parse("content://media/external/audio/albumart")
+                    val artUriC = Uri.withAppendedPath(uri,albumIdC).toString()
                     val artistC =
                         cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))
                     val durationC =
                         cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION))
                     val pathC = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
 
-                    val music = Music(id = idC,title = titleC,album = albumC,artist = artistC,duration = durationC,path = pathC)
+                    val music = Music(
+                        id = idC,
+                        title = titleC,
+                        album = albumC,
+                        artist = artistC,
+                        duration = durationC,
+                        path = pathC,
+                        artUri = artUriC
+                    )
                     val file = File(music.path)
-                    if(file.exists()){
+                    if (file.exists()) {
                         tempList.add(music)
                     }
                 } while (cursor.moveToNext())
