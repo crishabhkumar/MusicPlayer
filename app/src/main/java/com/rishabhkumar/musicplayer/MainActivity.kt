@@ -19,7 +19,7 @@ import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding   //for directly connecting layout element to  kotlin variables
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var musicAdapter: MusicAdapter
 
@@ -29,27 +29,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initializeLayout()
+        initializeLayout()  //initializing the layout
 
         //for checking buttons are working properly or not
+        //connecting the shuffle button
         binding.btnShuffle.setOnClickListener {
 //            Toast.makeText(this,"Shuffle button clicked.",Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, PlayerActivity::class.java)
             startActivity(intent)
         }
 
+        //connecting the favourite button
         binding.btnFavourite.setOnClickListener {
 //            Toast.makeText(this,"Favourite button clicked.",Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, FavouriteActivity::class.java)
             startActivity(intent)
         }
 
+        //connecting the playlist button
         binding.btnPlaylist.setOnClickListener {
 //            Toast.makeText(this,"Playlist button clicked.",Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, PlaylistActivity::class.java)
             startActivity(intent)
         }
 
+        //connecting the navigation bar
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navFeedback ->
@@ -68,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //for requesting permission
+    //for requesting permission to access the file storage of phone
     private fun requestRunTimePermission() {
         if (ActivityCompat.checkSelfPermission(
                 this@MainActivity,
@@ -83,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //function what to result after accessing the storage
     @SuppressLint("MissingSuperCall")
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -113,12 +118,12 @@ class MainActivity : AppCompatActivity() {
     //to make code mush easier to read
     @SuppressLint("SetTextI18n")
     private fun initializeLayout() {
-        requestRunTimePermission()
-        setTheme(R.style.customPinkNav)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        requestRunTimePermission()               //requesting to access the file storage
+        setTheme(R.style.customPinkNav)         //setting up the theme
+        binding = ActivityMainBinding.inflate(layoutInflater)       //inflating the layout
         setContentView(binding.root)
         //for nav drawer
-        toggle = ActionBarDrawerToggle(this, binding.root, R.string.open, R.string.close)
+        toggle = ActionBarDrawerToggle(this, binding.root, R.string.open, R.string.close)       //setting up the toggle
         binding.root.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -147,7 +152,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //code for accessing all audio files (mp3) from phone storage
+    //function for getting all audio files (mp3) from phone storage
     @SuppressLint("Recycle", "Range")
     private fun getAllAudio(): ArrayList<Music> {
         val tempList = ArrayList<Music>()

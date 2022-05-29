@@ -12,6 +12,7 @@ import com.rishabhkumar.musicplayer.databinding.MusicViewBinding
 
 class MusicAdapter(private val context : Context,  private val musicList:ArrayList<Music>) : RecyclerView.Adapter<MusicAdapter.MyHolder> () {
     class MyHolder(binding: MusicViewBinding) : RecyclerView.ViewHolder(binding.root) {
+        //connecting the layout elements with holder elements
         val title = binding.txtSongName
         val album = binding.txtSongAlbum
         val image = binding.imgMusicView
@@ -19,6 +20,7 @@ class MusicAdapter(private val context : Context,  private val musicList:ArrayLi
         val root = binding.root
     }
 
+    //what to display in layout
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicAdapter.MyHolder {
         return MyHolder(MusicViewBinding.inflate(LayoutInflater.from(context),parent,false))
     }
@@ -43,6 +45,7 @@ class MusicAdapter(private val context : Context,  private val musicList:ArrayLi
         }
     }
 
+    //to calculate the number of songs in holder
     override fun getItemCount(): Int {
         return musicList.size
     }
