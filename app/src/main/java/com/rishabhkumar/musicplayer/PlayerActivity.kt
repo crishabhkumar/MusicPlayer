@@ -72,6 +72,13 @@ class PlayerActivity : AppCompatActivity() {
                 setLayout()
                 createMediaPlayer()
             }
+            "MainActivity"->{
+                musicListPlayer = ArrayList()
+                musicListPlayer.addAll(MainActivity.musicListMA)
+                musicListPlayer.shuffle()
+                setLayout()
+                createMediaPlayer()
+            }
         }
     }
 

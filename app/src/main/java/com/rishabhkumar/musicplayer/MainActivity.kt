@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         binding.btnShuffle.setOnClickListener {
 //            Toast.makeText(this,"Shuffle button clicked.",Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, PlayerActivity::class.java)
+            intent.putExtra("index",0)
+            intent.putExtra("class","MainActivity")
             startActivity(intent)
         }
 
