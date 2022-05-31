@@ -29,15 +29,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initializeLayout()  //initializing the layout
+        setTheme(R.style.customPinkNav)         //setting up the theme
+        binding = ActivityMainBinding.inflate(layoutInflater)       //inflating the layout
+        setContentView(binding.root)
+        //for nav drawer
+        toggle = ActionBarDrawerToggle(
+            this,
+            binding.root,
+            R.string.open,
+            R.string.close
+        )       //setting up the toggle
+        binding.root.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        if (requestRunTimePermission()) { //requesting to access the file storage
+            initializeLayout()  //initializing the layout
+        }
+
 
         //for checking buttons are working properly or not
         //connecting the shuffle button
         binding.btnShuffle.setOnClickListener {
 //            Toast.makeText(this,"Shuffle button clicked.",Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, PlayerActivity::class.java)
-            intent.putExtra("index",0)
-            intent.putExtra("class","MainActivity")
+            intent.putExtra("index", 0)
+            intent.putExtra("class", "MainActivity")
             startActivity(intent)
         }
 
@@ -75,7 +91,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //for requesting permission to access the file storage of phone
-    private fun requestRunTimePermission() {
+    private fun requestRunTimePermission(): Boolean {
         if (ActivityCompat.checkSelfPermission(
                 this@MainActivity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -86,7 +102,9 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 11
             )
+            return false
         }
+        return true
     }
 
     //function what to result after accessing the storage
@@ -97,9 +115,10 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         if (requestCode == 11) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission granted.", Toast.LENGTH_SHORT).show()
-            else {
+                initializeLayout()
+            } else {
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -120,15 +139,7 @@ class MainActivity : AppCompatActivity() {
     //to make code mush easier to read
     @SuppressLint("SetTextI18n")
     private fun initializeLayout() {
-        requestRunTimePermission()               //requesting to access the file storage
-        setTheme(R.style.customPinkNav)         //setting up the theme
-        binding = ActivityMainBinding.inflate(layoutInflater)       //inflating the layout
-        setContentView(binding.root)
-        //for nav drawer
-        toggle = ActionBarDrawerToggle(this, binding.root, R.string.open, R.string.close)       //setting up the toggle
-        binding.root.addDrawerListener(toggle)
-        toggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
 //        val musicList = ArrayList<String>()
 //        musicList.add("My name is khan.")
@@ -187,7 +198,7 @@ class MainActivity : AppCompatActivity() {
                     val albumIdC =
                         cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))
                     val uri = Uri.parse("content://media/external/audio/albumart")
-                    val artUriC = Uri.withAppendedPath(uri,albumIdC).toString()
+                    val artUriC = Uri.withAppendedPath(uri, albumIdC).toString()
                     val artistC =
                         cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))
                     val durationC =
